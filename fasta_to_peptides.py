@@ -1,22 +1,10 @@
 from Bio import SeqIO
+from pyteomics import parser
 
-# Function to simulate tryptic digestion
 def tryptic_digest(sequence):
-    # Define the cleavage rules: cleave after K or R, unless followed by P
-    peptides = []
-    current_peptide = []
-    for i in range(len(sequence)):
-        aa = sequence[i]
-        current_peptide.append(aa)
-        
-        # Check for cleavage sites (K or R, not followed by P)
-        if aa in ['K', 'R'] and (i == len(sequence) - 1 or sequence[i + 1] != 'P'):
-            peptides.append(''.join(current_peptide))
-            current_peptide = []
-    
-    # Add the last peptide if it exists
-    if current_peptide:
-        peptides.append(''.join(current_peptide))
+    # Define trypsin digestion rules using pyteomics parser
+    # The rule 'K' or 'R', except when followed by 'P'
+    peptides = list(parser.cleave(sequence, parser.trypsin))
     
     return peptides
 
