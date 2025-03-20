@@ -4,7 +4,7 @@ from pyteomics import parser
 def tryptic_digest(sequence):
     # Define trypsin digestion rules using pyteomics parser
     # The rule 'K' or 'R', except when followed by 'P'
-    peptides = list(parser.cleave(sequence, parser.trypsin))
+    peptides = list(parser.cleave(sequence, parser.expasy_rules['trypsin']))
     
     return peptides
 
