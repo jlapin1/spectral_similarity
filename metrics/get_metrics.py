@@ -52,7 +52,37 @@ def metrics_comparison(
 
     # Iterate through unique peptide IDs
     for i in set(peptides_predictions["ID"]):
+        # Filter rows for the given ID
+        selected_peptide = peptides_predictions[peptides_predictions["ID"] == i]
+        selected_peptide_switched = peptides_switch_predictions[
+            peptides_switch_predictions["ID"] == i
+        ]
 
+        # Identify the first annotation in selected_peptide that is also in selected_peptide_switched
+        first_common_annotation = next(
+            (
+                ann
+                for ann in selected_peptide["annotation"]
+                if ann in set(selected_peptide_switched["annotation"])
+            ),
+            None,
+        )
+
+        # If a common annotation exists, filter on it; otherwise, return empty structures
+        if first_common_annotation is not None:
+            selected_peptide = selected_peptide[
+                selected_peptide["annotation"] == first_common_annotation
+            ].copy()
+            selected_peptide_switched = selected_peptide_switched[
+                selected_peptide_switched["annotation"] == first_common_annotation
+            ].copy()
+            original_intensities = selected_peptide["intensities"].to_numpy()
+        else:
+            selected_peptide = selected_peptide.iloc[0:0].copy()
+            selected_peptide_switched = selected_peptide_switched.iloc[0:0].copy()
+            original_intensities = np.array([])
+
+        """
         selected_peptide = peptides_predictions[peptides_predictions["ID"] == i]
         selected_peptide_switched = peptides_switch_predictions[
             peptides_switch_predictions["ID"] == i
@@ -70,7 +100,8 @@ def metrics_comparison(
             selected_peptide_switched["annotation"].isin(common_annotations)
         ].copy()
 
-        original_intensities = selected_peptide["intensities"].to_numpy()
+        original_intensities = selected_peptide["intensities"].to_numpy()"
+        """
 
         for j in range(num_randomization_rounds):
             score_dict = {}
@@ -98,7 +129,10 @@ def metrics_comparison(
                     "mz": selected_peptide["mz"].to_numpy(),
                 }
 
-                score = getattr(M, key)(**inp)
+                try:
+                    score = getattr(M, key)(**inp)
+                except Exception as e:
+                    score = np.nan
 
                 score_dict[key] = score
 
