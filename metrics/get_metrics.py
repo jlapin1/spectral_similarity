@@ -116,7 +116,11 @@ def metrics_comparison(
             if randomize_switched:
                 noisy_intensities = selected_peptide["intensities"].to_numpy()
                 for _ in range(num_randomizations):
-                    noisy_intensities = swap_two(noisy_intensities)
+                    try:
+                        noisy_intensities = swap_two(noisy_intensities)
+                    except:
+                        noisy_intensities = []
+
             noisy_intensities = np.clip(noisy_intensities, 0, None)
 
             for key in metric_keys:
@@ -131,7 +135,7 @@ def metrics_comparison(
 
                 try:
                     score = getattr(M, key)(**inp)
-                except Exception as e:
+                except:
                     score = np.nan
 
                 score_dict[key] = score
