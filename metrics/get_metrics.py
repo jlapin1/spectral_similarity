@@ -33,7 +33,7 @@ def add_gaussian_noise(arr, mean=0, std_dev=0.01):
 
 
 def swap_two(arr):
-    idx1, idx2 = np.random.choice(len(arr), 2, replace=False)
+    idx1, idx2 = np.random.choice(len(arr), 2, replace=True)
     arr[idx1], arr[idx2] = arr[idx2], arr[idx1]
     return arr
 
@@ -81,27 +81,6 @@ def metrics_comparison(
             selected_peptide = selected_peptide.iloc[0:0].copy()
             selected_peptide_switched = selected_peptide_switched.iloc[0:0].copy()
             original_intensities = np.array([])
-
-        """
-        selected_peptide = peptides_predictions[peptides_predictions["ID"] == i]
-        selected_peptide_switched = peptides_switch_predictions[
-            peptides_switch_predictions["ID"] == i
-        ]
-
-        common_annotations = set(selected_peptide["annotation"]).intersection(
-            selected_peptide_switched["annotation"]
-        )
-
-        selected_peptide = selected_peptide[
-            selected_peptide["annotation"].isin(common_annotations)
-        ].copy()
-
-        selected_peptide_switched = selected_peptide_switched[
-            selected_peptide_switched["annotation"].isin(common_annotations)
-        ].copy()
-
-        original_intensities = selected_peptide["intensities"].to_numpy()"
-        """
 
         for j in range(num_randomization_rounds):
             score_dict = {}
