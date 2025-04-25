@@ -1,0 +1,11 @@
+name: lorentz_center_spectrum_similarity
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - setuptools
+  - pip:
+    - -r requirements.txt

@@ -1,0 +1,11 @@
+biopython~=1.85
+jupyter~=1.1.1
+koinapy==0.0.10
+matplotlib~=3.10.1
+numpy~=2.2.5
+pandas~=2.2.3
+pyteomics~=4.7.5
+scikit-learn~=1.6.1
+scipy~=1.15.2
+seaborn~=0.13.2
+tqdm~=4.67.1
