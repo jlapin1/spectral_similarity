@@ -19,11 +19,6 @@ def remove_ux_containing(peptides: list) -> list:
 def switch_first_il(peptide):
     return re.sub(r"[IL]", lambda x: "L" if x.group() == "I" else "I", peptide, count=1)
 
-
-import re
-import random
-
-
 def switch_random_il(peptide):
     """
     Randomly swap an occurrence of I or L, ignoring any I or L inside square brackets.
@@ -62,3 +57,23 @@ def switch_random_il(peptide):
     # Reconstruct the peptide
     peptide = peptide[:pos] + swapped_char + peptide[pos + 1 :]
     return peptide
+
+def has_il_outside_brackets(peptide):
+    """
+    Returns True if the ProForma sequence contains at least one 'I' or 'L'
+    outside square brackets.
+
+    Parameters
+    ----------
+    sequence : str
+        A ProForma-formatted sequence.
+
+    Returns
+    -------
+    bool
+        True if at least one 'I' or 'L' occurs outside brackets, False otherwise.
+    """
+    # Remove bracketed annotations
+    cleaned = re.sub(r"\[[^\]]*\]", "", peptide)
+    # Check for I or L
+    return bool(re.search(r"[IL]", cleaned))
