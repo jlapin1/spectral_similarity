@@ -8,7 +8,9 @@ def obtain_predictions_pairs(
     charges=[2],
     collision_energie=28,
     instrument_types="LUMOS",
+    fragmentation_types="HCD",
     switched=False,
+    model="UniSpec",
 ):
     """
     Function to obtain intensity predictions for a set of peptides.
@@ -20,19 +22,13 @@ def obtain_predictions_pairs(
     inputs["precursor_charges"] = np.array(num_peptides * charges)
     inputs["collision_energies"] = np.array(num_peptides * [collision_energie])
     inputs["instrument_types"] = np.array(num_peptides * [instrument_types])
+    inputs["fragmentation_types"] = np.array(num_peptides * [fragmentation_types])
 
-    model = Koina("UniSpec", "koina.wilhelmlab.org:443")
-    predictions = model.predict(inputs)
+    model = Koina(model, "koina.wilhelmlab.org:443")
+    predictions = model.predict(inputs, debug = True)
 
     predictions["annotation"] = predictions["annotation"].map(
         lambda x: x.decode("utf-8")
-    )
-
-    predictions["ID"] = (
-        predictions.groupby(
-            ["peptide_sequences", "precursor_charges"], sort=False
-        ).ngroup()
-        + 1
     )
 
     predictions["non_switched"] = switched
