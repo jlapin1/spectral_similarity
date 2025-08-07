@@ -95,10 +95,12 @@
 - ***Ion mobility***
 - ***Fragment intensity***
 
+![-](figures_draft/Figure1.png)
+
 **Theoretical comparison**
-- ***Retention time***
-- ***Ion mobility***
 - ***Fragment intensity***
+
+![-](figures_draft/Figure2.png)
 
 **Practical comparison:**
 - ***Retention time***
@@ -106,8 +108,14 @@
 - ***Fragment intensity***
 - ***Combine all predicted behavior***
 
+![-](figures_draft/Figure3.png)
+![-](figures_draft/Figure4.png)
+
 **[todo-maybe?] In-depth disambiguation performance evaluation (position/AAs/...)**
 - ***???***
+
+![-](figures_draft/Figure5a.png)
+![-](figures_draft/Figure5b.png)
 
 **[todo-maybe?] Usecase**
 - ***???***
