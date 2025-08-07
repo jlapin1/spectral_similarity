@@ -52,12 +52,8 @@
 
 ## Materials and Methods
 
-**Dataset Preparation:**
-- **Source**: Human proteome LC-MS/MS data from MaxQuant searches
-- **Filtering**: High-confidence PSMs (PEP < 0.01), peptide length 7-30 amino acids
-- **Selection**: 892 unique I/L-containing peptides outside modification brackets
-- **Controlled testing**: Systematic I↔L swapping to create test pairs
-- **Characteristics**: Average length 12.3 aa, charge states 2+ (68%), 3+ (28%), 4+ (4%)
+**Datasets**
+[todo]
 
 **Machine Learning Models:**
 - **Retention Time Prediction**:
@@ -121,7 +117,7 @@
 **Key Achievements:**
 - **First systematic evaluation** of spectral similarity metrics for I/L discrimination
 - **First systematic evaluation** of behavior predictors for I/L disambiguation
-- **Practical performance levels**: Best methods achieve ~70% accuracy, >75% when combined with retention time
+- **Practical performance levels**: Best methods achieve ~70% accuracy, >75% [todo] when combined with retention time
 - **Clear metric rankings**: Modified dot product and diagnostic weighted similarity significantly outperform traditional approaches
 - **Multi-modal validation**: Demonstrates value of combining chromatographic, ion mobility, and spectral information
 
