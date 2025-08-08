@@ -109,7 +109,7 @@
 - ***Combine all predicted behavior***
 
 ![-](figures_draft/Figure3.png)
-![-](figures_draft/Figure4.png)
+![-](figures_draft/Figure4.png) 
 
 **[todo-maybe?] In-depth disambiguation performance evaluation (position/AAs/...)**
 - ***???***
