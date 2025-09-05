@@ -47,8 +47,9 @@
 
 **Study Objectives:**
 - Systematically compare spectral similarity metrics for I/L discrimination
-- Evaluate integration of predicted behavior for disambiguation
+- Evaluate application of predicted behavior for disambiguation
 - Provide practical recommendations for proteomics workflows
+- Relate results to how the database is constructed, when DB is created we can estimate ambiguity?
 
 ## Materials and Methods
 
