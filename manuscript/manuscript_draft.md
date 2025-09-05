@@ -10,7 +10,7 @@
 
 **Conclusions:** Spectral similarity metrics can distinguish I/L amino acids with ~70% accuracy[todo]. Furthermore, the combination of m/z-dependent weighting and retention time prediction shows promise for practical implementation.
 
-## Introduction
+## Introduction (Magnus & Lukas)
 
 **Ambiguity Problem in LC-MS:**
 - Proteomics is important, LC-MS commonly used
@@ -25,6 +25,7 @@
 - Highly similar physicochemical properties
 - Create highly similar but not identical fragmentation patterns in MS/MS, RT, IM
 - Current search engines often treat them as equivalent
+- How big is this problem currently for most experiments? <- potentially refer to figure that quantifies this (Magnus will add papers)
 
 **Why would we want to disambiguate?**
 - **Variant analysis**: Single amino acid polymorphisms may involve I/L differences
