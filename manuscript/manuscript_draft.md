@@ -100,6 +100,7 @@
 - ***Fragment intensity***
 
 **Comparing predictions**
+Instead of boxplots make distributions (potentially)
 - ***Retention time***
 - ***Ion mobility***
 - ***Fragment intensity***
