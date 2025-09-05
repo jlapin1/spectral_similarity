@@ -94,6 +94,11 @@
 
 ## Results
 
+**Comparing experimental values**
+- ***Retention time***
+- ***Ion mobility***
+- ***Fragment intensity***
+
 **Comparing predictions**
 - ***Retention time***
 - ***Ion mobility***
