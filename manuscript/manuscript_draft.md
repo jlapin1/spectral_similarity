@@ -109,7 +109,7 @@ Instead of boxplots make distributions (potentially)
 
 **Theoretical comparison**
 - ***Fragment intensity***
-
+- For scrutiny of Thomas
 ![-](figures_draft/Figure2.png)
 
 **Practical comparison:**
