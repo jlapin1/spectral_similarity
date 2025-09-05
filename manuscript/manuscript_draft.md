@@ -14,6 +14,7 @@
 
 **Ambiguity Problem in LC-MS:**
 - Proteomics is important, LC-MS commonly used
+- Scoring and FDR of identifications (not sure about placement)
 - Signals not always able to discriminate
 - RT: co-elution
 - IM: co-isolation  
@@ -40,7 +41,6 @@
 - Spectral libraries and manual interpretation are not a complete solution
 
 **Machine Learning for disambiguation in Proteomics:**
-
 - **Retention time prediction**: DeepLC predicts chromatographic behavior from peptide properties
 - **Ion mobility prediction**: IM2Deep predicts ion mobility of peptides
 - **Fragment prediction**: Models like Prosit and UniSpec predict MS/MS spectra from sequences
@@ -55,6 +55,8 @@
 ## Materials and Methods
 
 **Datasets**
+- Van Puyvelde dataset
+- Specific datasets (Magnus)
 [todo]
 
 **Machine Learning Models:**
@@ -71,15 +73,15 @@
   - UniSpec
   - Settings: HCD fragmentation, 28 eV collision energy, Orbitrap LUMOS
 
-
 **Spectral Similarity Metrics (18 total):**
 - **Traditional**: Cosine similarity, Pearson correlation, Spearman correlation
 - **Proteomics-specific**: SEQUEST score, Andromeda score, MASSBANK score, GNPS score
 - **Distance-based**: Mean squared error, Wasserstein distance, Canberra distance, Bray-Curtis dissimilarity
 - **Information-theoretic**: Mutual information, Kendall's tau
 - **Specialized**: Modified dot product, diagnostic weighted similarity, Stein-Scott score
+- Metric by Thomas and Nicola
 
-**Experimental Design:**
+**Experimental Design: (not sure about placement)**
 - **Controlled I/L swapping**: Random selection of one I/L position per peptide for I→L or L→I conversion
 - **Performance metric**: Binary classification accuracy (original vs swapped sequence scoring)
 - **Validation**: Bootstrap sampling (N=1000), 95% confidence intervals
