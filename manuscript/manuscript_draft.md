@@ -117,6 +117,7 @@ Instead of boxplots make distributions (potentially)
 - ***Ion mobility***
 - ***Fragment intensity***
 - ***Combine all predicted behavior***
+- Add all metrics to figure 3
 
 ![-](figures_draft/Figure3.png)
 ![-](figures_draft/Figure4.png) 
