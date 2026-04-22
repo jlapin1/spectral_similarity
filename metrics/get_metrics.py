@@ -6,24 +6,22 @@ metric_keys = [
     m for m in dir(M) if ((m[:2] != "__") & (m != "binarize") & (m != "normalize"))
 ]
 metric_keys = [
-    "mse",
-    "sequest_score",
-    "andromeda_score",
+    "x_corr",
     "pearson_correlation",
     "spearman_correlation",
-    "dot_product",
-    "mara_similarity",
-    "modified_dot_product",
-    "massbank_score",
-    "gnps_score",
-    "stein_scott_score",
-    "wasserstein",
     "kendall_tau",
-    "mutual_information",
-    "bray_curtis",
+    "cosine_similarity",
+    "spectral_angle",
+    "weighted_dot_product",
+    "fit",
+    "ruzicka_similarity_1",
+    "ruzicka_similarity_2",
+    "mse",
     "canberra_distance",
-    "mara_weighted_similarity",
-    "diagnostic_weighted_similarity",
+    "wasserstein",
+    "bray_curtis",
+    "mutual_information",
+    "hyper_score",
 ]
 
 
@@ -92,6 +90,9 @@ def metrics_comparison(
         mz_values = selected_peptide["mz"].to_numpy()
         mz_values_switched = selected_peptide_switched["mz"].to_numpy()
 
+        annotation = selected_peptide.index.to_numpy()
+        annotation_switched = selected_peptide_switched.index.to_numpy()
+
         # Get peptide sequence info (from the first row since they're all the same ID)
         peptide_seq = selected_peptide["peptide_sequences"].iloc[0]
         peptide_seq_switched = selected_peptide_switched["peptide_sequences"].iloc[0]
@@ -118,6 +119,8 @@ def metrics_comparison(
                     "intensity2": switched_intensities,
                     "mz1": mz_values,
                     "mz2": mz_values_switched,
+                    "annotation1": annotation,
+                    "annotation2": annotation_switched,
                     "diagnostic_mz": np.array([]),
                     "mz": mz_values,
                 }
