@@ -26,3 +26,101 @@
 	Abstract = {Antibody sequences can be determined at 99% accuracy directly from the polypeptide product by using bottom-up proteomics techniques. Sequencing accuracy at the peptide level is limited by the isobaric residues leucine and isoleucine, incomplete fragmentation spectra in which the order of two or more residues remains ambiguous due to lacking fragment ions for the intermediate positions, and isobaric combinations of amino acids, of potentially different lengths, for example, GG = N and GA = Q. Here, we present several updates to Stitch (v1.5), which performs template-based assembly of &lt;i&gt;de novo&lt;/i&gt; peptides to reconstruct antibody sequences. This version introduces a mass-based alignment algorithm that explicitly accounts for mass coincidence errors. In addition, it incorporates a postprocessing procedure to assign I/L residues based on secondary fragments (satellite ions, &lt;i&gt;i.e.&lt;/i&gt;, &lt;i&gt;w-&lt;/i&gt;ions). Moreover, evidence for sequence assignments can now be directly evaluated with the addition of an integrated spectrum viewer. Lastly, input data from a wider selection of &lt;i&gt;de novo&lt;/i&gt; peptide sequencing algorithms are allowed, now including Casanovo, PEAKS, Novor.Cloud, pNovo, and MaxNovo, in addition to flat text and FASTA. Combined, these changes make Stitch compatible with a larger range of data processing pipelines and improve its tolerance to peptide-level sequencing errors.},
 	URL = {https://europepmc.org/articles/PMC11301774},
 }
+
+% ===== Added 2026-06-12 from verified PubMed search. Source: PubMed; DOIs included. =====
+
+% Direct precedent: predicted fragment intensities can distinguish I/L. Engage this for the novelty claim.
+@article{PMID:29125736,
+	Title = {pDeep: Predicting MS/MS Spectra of Peptides with Deep Learning},
+	Author = {Zhou, Xie-Xuan and Zeng, Wen-Feng and Chi, Hao and Luo, Chunjie and Liu, Chao and Zhan, Jianfeng and He, Si-Min and Zhang, Zhifei},
+	DOI = {10.1021/acs.analchem.7b02566},
+	Number = {23},
+	Volume = {89},
+	Year = {2017},
+	Journal = {Analytical Chemistry},
+	Pages = {12690--12697},
+	Note = {Explicitly demonstrates pDeep distinguishing isobaric peptides including I=L via predicted fragment intensities.},
+}
+
+@article{PMID:31283184,
+	Title = {MS/MS Spectrum Prediction for Modified Peptides Using pDeep2 Trained by Transfer Learning},
+	Author = {Zeng, Wen-Feng and Zhou, Xie-Xuan and Zhou, Wen-Jing and Chi, Hao and Zhan, Jianfeng and He, Si-Min},
+	DOI = {10.1021/acs.analchem.9b01262},
+	Number = {15},
+	Volume = {91},
+	Year = {2019},
+	Journal = {Analytical Chemistry},
+	Pages = {9724--9731},
+}
+
+% Deterministic route: ETD/HCD MS3 w-ions for Leu/Ile on Orbitrap Fusion.
+@article{PMID:24940639,
+	Title = {Discrimination of leucine and isoleucine in peptides sequencing with Orbitrap Fusion mass spectrometer},
+	Author = {Lebedev, Albert T and Damoc, Eugen and Makarov, Alexander A and Samgina, Tatiana Yu},
+	DOI = {10.1021/ac501200h},
+	Number = {14},
+	Volume = {86},
+	Year = {2014},
+	Journal = {Analytical Chemistry},
+	Pages = {7017--7022},
+}
+
+% Synthetic ground truth for I/L (known sequence by construction).
+@article{PMID:28135259,
+	Title = {Building ProteomeTools based on a complete synthetic human proteome},
+	Author = {Zolg, Daniel P and Wilhelm, Mathias and Schnatbaum, Karsten and Zerweck, Johannes and Knaute, Tobias and Delanghe, Bernard and Bailey, Derek J and Gessulat, Siegfried and Ehrlich, Hans-Christian and Weininger, Maximilian and Yu, Peng and Schlegl, Judith and Kramer, Karl and Schmidt, Tobias and Kusebauch, Ulrike and Deutsch, Eric W and Aebersold, Ruedi and Moritz, Robert L and Wenschuh, Holger and Moehring, Thomas and Aiche, Stephan and Huhmer, Andreas and Reimer, Ulf and Kuster, Bernhard},
+	DOI = {10.1038/nmeth.4153},
+	Number = {3},
+	Volume = {14},
+	Year = {2017},
+	Journal = {Nature Methods},
+	Pages = {259--262},
+}
+
+@article{PMID:31133760,
+	Title = {Prosit: proteome-wide prediction of peptide tandem mass spectra by deep learning},
+	Author = {Gessulat, Siegfried and Schmidt, Tobias and Zolg, Daniel P and Samaras, Patroklos and Schnatbaum, Karsten and Zerweck, Johannes and Knaute, Tobias and Rechenberger, Julia and Delanghe, Bernard and Huhmer, Andreas and Reimer, Ulf and Ehrlich, Hans-Christian and Aiche, Stephan and Kuster, Bernhard and Wilhelm, Mathias},
+	DOI = {10.1038/s41592-019-0426-7},
+	Year = {2019},
+	Journal = {Nature Methods},
+}
+
+@article{PMID:38329031,
+	Title = {UniSpec: Deep Learning for Predicting the Full Range of Peptide Fragment Ion Series to Enhance the Proteomics Data Analysis Workflow},
+	Author = {Lapin, Joel and Dong, Qian},
+	DOI = {10.1021/acs.analchem.3c02321},
+	Year = {2024},
+	Journal = {Analytical Chemistry},
+}
+
+@article{PMID:36433986,
+	Title = {AlphaPeptDeep: a modular deep learning framework to predict peptide properties for proteomics},
+	Author = {Zeng, Wen-Feng and Zhou, Xie-Xuan and Willems, Sander and Ammar, Constantin and Wahle, Maria and Bludau, Isabell and Voytik, Eugenia and Strauss, Maximilian T and Mann, Matthias},
+	DOI = {10.1038/s41467-022-34904-3},
+	Year = {2022},
+	Journal = {Nature Communications},
+}
+
+@article{PMID:34711972,
+	Title = {DeepLC can predict retention times for peptides that carry as-yet unseen modifications},
+	Author = {Bouwmeester, Robbin and Gabriels, Ralf and Hulstaert, Niels and Martens, Lennart and Degroeve, Sven},
+	DOI = {10.1038/s41592-021-01301-5},
+	Year = {2021},
+	Journal = {Nature Methods},
+}
+
+@article{PMID:40626784,
+	Title = {Collisional Cross-Section Prediction for Multiconformational Peptide Ions with IM2Deep},
+	Author = {Devreese, Robbe and Bouwmeester, Robbin},
+	DOI = {10.1021/acs.analchem.5c01142},
+	Year = {2025},
+	Journal = {Analytical Chemistry},
+}
+
+@article{PMID:37140039,
+	Title = {MS2PIP: a tool for MS/MS peak intensity prediction (2023 update)},
+	Author = {Declercq, Arthur and Bouwmeester, Robbin and Chiva, Cristina and Sabido, Eduard and Hirschler, Aurelie and Carapito, Christine and Martens, Lennart and Degroeve, Sven and Gabriels, Ralf},
+	DOI = {10.1093/nar/gkad335},
+	Year = {2023},
+	Journal = {Nucleic Acids Research},
+}
