@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.spatial.distance import cosine, braycurtis, canberra
 from scipy.stats import pearsonr, spearmanr, kendalltau, wasserstein_distance
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, mutual_info_score
 from math import factorial
 
 
@@ -103,19 +103,14 @@ def bray_curtis(intensity1, intensity2, **kwargs):
     return braycurtis(intensity1, intensity2)
 
 
-def mutual_information(intensity1, intensity2, **kwargs):
-    eps = 1e-15
-    px = intensity1 / np.linalg.norm(intensity1, 1)
-    py = intensity2 / np.linalg.norm(intensity2, 1)
-
-    P = np.diag(px * py)  # the joint
-    P /= P.sum()
-
-    # marginal
-    Pi = P.sum(axis=1)
-    Pj = P.sum(axis=0)
-
-    return np.sum(P * np.log((P + eps) / (Pi[:, None] * Pj[None, :] + eps)))
+def mutual_information(intensity1, intensity2, bins=20, **kwargs):
+    c_intensity1 = np.digitize(
+        intensity1, bins=np.histogram_bin_edges(intensity1, bins)
+    )
+    c_intensity2 = np.digitize(
+        intensity2, bins=np.histogram_bin_edges(intensity2, bins)
+    )
+    return mutual_info_score(c_intensity1, c_intensity2)
 
 
 def hyper_score(annotation1, intensity1, annotation2, intensity2, **kwargs):
@@ -125,8 +120,8 @@ def hyper_score(annotation1, intensity1, annotation2, intensity2, **kwargs):
     b_ions_switched = {ion.split("+")[0][1:] for ion in annotation2 if ion.startswith("b")}
     y_ions_switched = {ion.split("+")[0][1:] for ion in annotation2 if ion.startswith("y")}
 
-    nb = b_ions.intersection(b_ions_switched)
-    ny = y_ions.intersection(y_ions_switched)
+    nb = len(b_ions.intersection(b_ions_switched))
+    ny = len(y_ions.intersection(y_ions_switched))
 
     dot = np.dot(intensity1, intensity2)
 
