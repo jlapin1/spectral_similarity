@@ -72,16 +72,16 @@ def fit(intensity1, intensity2, **kwargs):
 
 def ruzicka_similarity_1(intensity1, intensity2, **kwargs):
     # Test L1 norm + Ruzicka
-    intensity1 / np.linalg.norm(intensity1, 1)
-    intensity2 / np.linalg.norm(intensity2, 1)
+    intensity1 = intensity1 / np.linalg.norm(intensity1, 1)
+    intensity2 = intensity2 / np.linalg.norm(intensity2, 1)
     return np.sum(np.minimum(intensity1, intensity2)) / np.sum(
         np.maximum(intensity1, intensity2)
     )
 
 def ruzicka_similarity_2(intensity1, intensity2, **kwargs):
     # Test L2 norm + Ruzicka
-    intensity1 / np.linalg.norm(intensity1, 2)
-    intensity2 / np.linalg.norm(intensity2, 2)
+    intensity1 = intensity1 / np.linalg.norm(intensity1, 2)
+    intensity2 = intensity2 / np.linalg.norm(intensity2, 2)
     return np.sum(np.minimum(intensity1, intensity2)) / np.sum(
         np.maximum(intensity1, intensity2)
     )
@@ -114,6 +114,7 @@ def mutual_information(intensity1, intensity2, bins=20, **kwargs):
 
 
 def hyper_score(annotation1, intensity1, annotation2, intensity2, **kwargs):
+    # annotations ['b2+1', 'b3+1', 'b4+1', 'y1+1', 'y2+1', 'y3+1', 'y4+1', 'y5+1', 'y5+2', 'y6+1']
     b_ions = {ion.split("+")[0][1:] for ion in annotation1 if ion.startswith("b")}
     y_ions = {ion.split("+")[0][1:] for ion in annotation1 if ion.startswith("y")}
 
@@ -123,6 +124,13 @@ def hyper_score(annotation1, intensity1, annotation2, intensity2, **kwargs):
     nb = len(b_ions.intersection(b_ions_switched))
     ny = len(y_ions.intersection(y_ions_switched))
 
-    dot = np.dot(intensity1, intensity2)
+    # cast to float64
+    # https://stackoverflow.com/questions/7559595/python-runtimewarning-overflow-encountered-in-long-scalars
+    intensity1 = np.array(intensity1, dtype=np.float64)
+    intensity2 = np.array(intensity2, dtype=np.float64)
 
-    return dot * factorial(nb) * factorial(ny)
+    dot = np.dot(intensity1, intensity2)
+    dot2 = np.sqrt(dot) # The original HS between experimental spectra and barcodes
+    # here applied between for comparison against ms2pip predictions, normalisation needed.
+    
+    return dot2 * factorial(nb) * factorial(ny)
