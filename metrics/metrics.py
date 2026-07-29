@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.spatial.distance import cosine, braycurtis, canberra
 from scipy.stats import pearsonr, spearmanr, kendalltau, wasserstein_distance
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, mutual_info_score
 from math import factorial
 
 
@@ -72,16 +72,16 @@ def fit(intensity1, intensity2, **kwargs):
 
 def ruzicka_similarity_1(intensity1, intensity2, **kwargs):
     # Test L1 norm + Ruzicka
-    intensity1 / np.linalg.norm(intensity1, 1)
-    intensity2 / np.linalg.norm(intensity2, 1)
+    intensity1 = intensity1 / np.linalg.norm(intensity1, 1)
+    intensity2 = intensity2 / np.linalg.norm(intensity2, 1)
     return np.sum(np.minimum(intensity1, intensity2)) / np.sum(
         np.maximum(intensity1, intensity2)
     )
 
 def ruzicka_similarity_2(intensity1, intensity2, **kwargs):
     # Test L2 norm + Ruzicka
-    intensity1 / np.linalg.norm(intensity1, 2)
-    intensity2 / np.linalg.norm(intensity2, 2)
+    intensity1 = intensity1 / np.linalg.norm(intensity1, 2)
+    intensity2 = intensity2 / np.linalg.norm(intensity2, 2)
     return np.sum(np.minimum(intensity1, intensity2)) / np.sum(
         np.maximum(intensity1, intensity2)
     )
@@ -103,31 +103,34 @@ def bray_curtis(intensity1, intensity2, **kwargs):
     return braycurtis(intensity1, intensity2)
 
 
-def mutual_information(intensity1, intensity2, **kwargs):
-    eps = 1e-15
-    px = intensity1 / np.linalg.norm(intensity1, 1)
-    py = intensity2 / np.linalg.norm(intensity2, 1)
-
-    P = np.diag(px * py)  # the joint
-    P /= P.sum()
-
-    # marginal
-    Pi = P.sum(axis=1)
-    Pj = P.sum(axis=0)
-
-    return np.sum(P * np.log((P + eps) / (Pi[:, None] * Pj[None, :] + eps)))
+def mutual_information(intensity1, intensity2, bins=20, **kwargs):
+    c_intensity1 = np.digitize(
+        intensity1, bins=np.histogram_bin_edges(intensity1, bins)
+    )
+    c_intensity2 = np.digitize(
+        intensity2, bins=np.histogram_bin_edges(intensity2, bins)
+    )
+    return mutual_info_score(c_intensity1, c_intensity2)
 
 
 def hyper_score(annotation1, intensity1, annotation2, intensity2, **kwargs):
+    # annotations ['b2+1', 'b3+1', 'b4+1', 'y1+1', 'y2+1', 'y3+1', 'y4+1', 'y5+1', 'y5+2', 'y6+1']
     b_ions = {ion.split("+")[0][1:] for ion in annotation1 if ion.startswith("b")}
     y_ions = {ion.split("+")[0][1:] for ion in annotation1 if ion.startswith("y")}
 
     b_ions_switched = {ion.split("+")[0][1:] for ion in annotation2 if ion.startswith("b")}
     y_ions_switched = {ion.split("+")[0][1:] for ion in annotation2 if ion.startswith("y")}
 
-    nb = b_ions.intersection(b_ions_switched)
-    ny = y_ions.intersection(y_ions_switched)
+    nb = len(b_ions.intersection(b_ions_switched))
+    ny = len(y_ions.intersection(y_ions_switched))
+
+    # cast to float64
+    # https://stackoverflow.com/questions/7559595/python-runtimewarning-overflow-encountered-in-long-scalars
+    intensity1 = np.array(intensity1, dtype=np.float64)
+    intensity2 = np.array(intensity2, dtype=np.float64)
 
     dot = np.dot(intensity1, intensity2)
-
-    return dot * factorial(nb) * factorial(ny)
+    dot2 = np.sqrt(dot) # The original HS between experimental spectra and barcodes
+    # here applied between for comparison against ms2pip predictions, normalisation needed.
+    
+    return dot2 * factorial(nb) * factorial(ny)

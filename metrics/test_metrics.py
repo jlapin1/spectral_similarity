@@ -42,15 +42,15 @@ if __name__ == "__main__":
     print(f"5. Sequest Score: {x_corr(intensity1, intensity2):.4f}")
     print(f"6. Cosine Similarity: {cosine_similarity(intensity1, intensity2):.4f}")
     print(
-        f"7. Weighted Dot Product: {weighted_dot_product(intensity1_norm, intensity2_norm):.4f}"
+        f"7. Weighted Dot Product: {weighted_dot_product(mz, intensity1_norm, mz, intensity2_norm):.4f}"
     )
     print(f"8. Fit: {fit(intensity1, intensity2):.4f}")
     print(
-        f"9. Ruzicka Similarity (L1 norm): {ruzicka_similarity_1(mz, intensity1_norm, mz, intensity2_norm):.4f}"
+        f"9. Ruzicka Similarity (L1 norm): {ruzicka_similarity_1(intensity1_norm, intensity2_norm):.4f}"
     )
 
     print(
-        f"10. Ruzicka Similarity (L2 norm): {ruzicka_similarity_2(mz, intensity1_norm, mz, intensity2_norm):.4f}"
+        f"10. Ruzicka Similarity (L2 norm): {ruzicka_similarity_2(intensity1_norm, intensity2_norm):.4f}"
     )
     print(f"11. Hyper_score: {hyper_score(annotation1, intensity1, annotation2, intensity2):.4f}")
 
